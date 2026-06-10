@@ -3,191 +3,136 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>名工大 施設予約フォーム</title>
+    <title>施設の空き状況カレンダー｜名古屋工業大学 施設予約</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260610-3" />
   </head>
   <body>
-    <div class="page-shell">
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">NITech Facility Booking</p>
-          <h1>名工大 施設予約フォーム</h1>
+    <header class="site-header">
+      <a class="brand" href="index.html" aria-label="名古屋工業大学 施設予約">
+        <span class="brand-mark" aria-hidden="true">N</span>
+        <span>
+          <strong>名古屋工業大学 施設予約</strong>
+          <small>NAGOYA INSTITUTE OF TECHNOLOGY</small>
+        </span>
+      </a>
+      <button class="menu-button" type="button" aria-label="メニュー" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="global-nav" aria-label="主要メニュー">
+        <a href="news.html">お知らせ</a>
+        <a href="schedule.html">スケジュール</a>
+        <a href="information.html">センターご案内</a>
+        <a href="floor.html">施設貸出</a>
+        <a href="access.html">アクセス</a>
+        <a href="contact.html">お問い合わせ</a>
+        <a class="login-link" href="login.html">LOG IN</a>
+      </nav>
+    </header>
+
+    <section class="page-hero" aria-label="予約">
+      <div>
+        <p>Reservation</p>
+        <h1>予約</h1>
+      </div>
+    </section>
+
+    <main class="page-shell">
+      <nav class="breadcrumb" aria-label="パンくず">
+        <a href="index.html">ホーム</a>
+        <span>予約</span>
+      </nav>
+
+      <section class="content-panel center-panel">
+        <p class="eyebrow">Facility Calendar</p>
+        <h2>施設の空き状況カレンダー</h2>
+        <div class="title-rule"></div>
+        <p>
+          名古屋工業大学の施設使用条件をもとに、利用可能施設と時間帯を確認できます。実際の使用申請は、事前に担当課へメールで空き状況を確認し、使用希望日の3カ月前までに「施設使用願」を提出してください。
+          <a href="reserve.html">予約方法の詳細はこちら</a>
+        </p>
+        <p class="time-note">講義室 … 土・日・祝祭日 7:00-21:00　NITech Hall … 8:00-21:00　千種キャンパス グラウンド … 8:00-18:00</p>
+      </section>
+
+      <section class="calendar-card">
+        <div class="calendar-controls">
+          <button type="button" id="prevMonth" class="month-button prev-button">前月</button>
+          <h3 id="currentMonth">2026年 06月</h3>
+          <button type="button" id="nextMonth" class="month-button next-button">翌月</button>
         </div>
-        <div class="topbar-meta">
-          <span class="status-pill">デザインモック</span>
-          <span class="support-note">学内向け予約申請</span>
+
+        <div class="table-tools">
+          <label>
+            <span>施設グループ</span>
+            <select id="buildingFilter"><option value="all">すべて</option></select>
+          </label>
+          <label>
+            <span>表示時間帯</span>
+            <select id="timeFilter">
+              <option value="all">すべて</option>
+              <option value="morning">午前</option>
+              <option value="afternoon">午後</option>
+              <option value="night">夜間</option>
+            </select>
+          </label>
+          <label class="check-label">
+            <input type="checkbox" id="availableOnly" />
+            <span>空き枠のみ強調</span>
+          </label>
         </div>
-      </header>
 
-      <main class="content-grid">
-        <aside class="summary-column">
-          <section class="card progress-card">
-            <p class="eyebrow">Flow</p>
-            <ol class="progress-list">
-              <li class="is-current">
-                <span class="progress-number">1</span>
-                <div>
-                  <strong>入力</strong>
-                  <p>施設・日時・申請者情報を入力</p>
-                </div>
-              </li>
-              <li>
-                <span class="progress-number">2</span>
-                <div>
-                  <strong>確認</strong>
-                  <p>内容確認後に仮予約へ進行</p>
-                </div>
-              </li>
-              <li>
-                <span class="progress-number">3</span>
-                <div>
-                  <strong>完了</strong>
-                  <p>受付番号を発行して通知</p>
-                </div>
-              </li>
-            </ol>
-          </section>
+        <div class="legend-row">
+          <span><i class="legend-dot open"></i>空きあり</span>
+          <span><i class="legend-dot limited"></i>残りわずか</span>
+          <span><i class="legend-dot booked"></i>予約不可</span>
+          <span><i class="legend-dot closed"></i>休館・受付外</span>
+        </div>
 
-          <section class="card venue-card">
-            <p class="eyebrow">Reservation Desk</p>
-            <h2>対象施設</h2>
-            <ul class="facility-tags">
-              <li>講義室</li>
-              <li>会議室</li>
-              <li>演習室</li>
-              <li>共用スペース</li>
-            </ul>
-            <div class="contact-box">
-              <p class="contact-label">問い合わせ窓口</p>
-              <strong>情報基盤センター 施設運用担当</strong>
-              <p>内線 7250 / 平日 9:00-17:00</p>
-            </div>
-          </section>
+        <div class="scroll-hint">スクロールできます</div>
+        <div class="calendar-scroll" tabindex="0" aria-label="月間空き状況表">
+          <table class="availability-table">
+            <thead id="calendarHead"></thead>
+            <tbody id="calendarBody"></tbody>
+          </table>
+        </div>
+      </section>
 
-          <section class="card info-card">
-            <p class="eyebrow">Guide</p>
-            <h2>申請前の確認</h2>
-            <ul class="plain-list">
-              <li>授業利用が優先されます</li>
-              <li>学外者利用は用途確認が必要です</li>
-              <li>設備利用時は準備時間も含めて申請します</li>
-            </ul>
-          </section>
-        </aside>
+      <section class="reservation-actions">
+        <div class="draft-panel">
+          <p class="eyebrow">Selected Slots</p>
+          <h3>選択中の候補</h3>
+          <div id="selectedSlots" class="selected-slots"></div>
+          <div class="action-row">
+            <a class="primary-link" href="login.html">この内容で申請する</a>
+            <a class="text-link" href="floor.html">貸出施設一覧</a>
+          </div>
+        </div>
+        <div class="notice-box">
+          <p class="eyebrow">Notice</p>
+          <h3>ご利用前に</h3>
+          <p>授業・課外活動等で使用している場合、一斉休業日、大学が貸出不適当と判断した期間は使用できません。施設貸付料は前払いです。</p>
+        </div>
+      </section>
+    </main>
 
-        <section class="form-column">
-          <form id="reservationForm" class="reservation-form">
-            <section class="card form-card hero-card">
-              <div class="card-head">
-                <div>
-                  <p class="eyebrow">Reservation Type</p>
-                  <h2>空き状況確認・仮予約申し込み</h2>
-                </div>
-                <span class="status-pill subtle">Step 1 / 3</span>
-              </div>
-              <p class="hero-copy">
-                参考にした貸会議室フォームのように、施設情報と申請者情報を一続きで整理しつつ、
-                現在のデザインの色味と透明感を残した構成です。
-              </p>
-            </section>
+    <footer class="site-footer">
+      <div>
+        <strong>名古屋工業大学 施設予約</strong>
+        <p>講義室・グラウンド: 財務課管財係 / NITech Hall: 学術情報課</p>
+      </div>
+      <nav aria-label="フッター">
+        <a href="index.html">施設予約</a>
+        <a href="floor.html">施設貸出</a>
+        <a href="access.html">アクセス</a>
+        <a href="contact.html">お問い合わせ</a>
+      </nav>
+    </footer>
 
-            <section class="card form-card">
-              <div class="card-head">
-                <div>
-                  <p class="eyebrow">Facilities</p>
-                  <h2>利用施設</h2>
-                </div>
-              </div>
-              <div id="facilityOptions" class="facility-option-list"></div>
-            </section>
-
-            <section class="card form-card">
-              <div class="card-head">
-                <div>
-                  <p class="eyebrow">Schedule</p>
-                  <h2>利用日時</h2>
-                </div>
-              </div>
-              <div class="schedule-entry">
-                <label class="field">
-                  <span>利用日を追加</span>
-                  <div class="date-picker-row">
-                    <input type="date" id="dateInput" value="2026-04-20" />
-                    <button type="button" id="addDateButton" class="secondary-button">日付追加</button>
-                  </div>
-                </label>
-                <label class="field">
-                  <span>開始時刻</span>
-                  <input type="time" id="startTimeInput" value="13:00" />
-                </label>
-                <label class="field">
-                  <span>終了時刻</span>
-                  <input type="time" id="endTimeInput" value="15:00" />
-                </label>
-                <button type="button" id="addSlotButton" class="secondary-button slot-button">
-                  選択日程を追加
-                </button>
-              </div>
-              <div id="selectedDates" class="selected-dates"></div>
-              <div id="selectedSlots" class="slot-list"></div>
-            </section>
-
-            <section class="card form-card">
-              <div class="card-head">
-                <div>
-                  <p class="eyebrow">Applicant</p>
-                  <h2>申請者情報</h2>
-                </div>
-              </div>
-              <div class="form-grid">
-                <label class="field">
-                  <span>氏名</span>
-                  <input type="text" id="applicantName" placeholder="名工 太郎" />
-                </label>
-                <label class="field">
-                  <span>所属</span>
-                  <input type="text" id="department" placeholder="工学研究科 情報工学専攻" />
-                </label>
-                <label class="field">
-                  <span>メールアドレス</span>
-                  <input type="email" id="email" placeholder="taro.nitech@example.jp" />
-                </label>
-                <label class="field">
-                  <span>内線・電話番号</span>
-                  <input type="text" id="phone" placeholder="052-735-0000" />
-                </label>
-                <label class="field wide">
-                  <span>利用目的</span>
-                  <input type="text" id="purpose" placeholder="研究打合せ、ゼミ、説明会など" />
-                </label>
-                <label class="field wide">
-                  <span>備考</span>
-                  <textarea id="notes" rows="4" placeholder="必要設備、搬入、学外者参加の有無など"></textarea>
-                </label>
-              </div>
-            </section>
-
-            <section class="card form-card confirm-card">
-              <div class="card-head">
-                <div>
-                  <p class="eyebrow">Preview</p>
-                  <h2>入力内容の確認</h2>
-                </div>
-              </div>
-              <div id="previewPanel" class="preview-panel"></div>
-              <button type="submit" class="primary-button submit-button">確認画面へ進む</button>
-            </section>
-          </form>
-        </section>
-      </main>
-    </div>
-
-    <script src="app.js"></script>
+    <script src="app.js?v=20260610-3"></script>
   </body>
 </html>

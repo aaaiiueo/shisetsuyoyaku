@@ -1,230 +1,305 @@
+const timeSlots = [
+  { id: "morning", label: "午前", time: "07:00-12:00" },
+  { id: "afternoon", label: "午後", time: "12:00-17:00" },
+  { id: "night", label: "夜間", time: "17:00-21:00" },
+];
+
 const facilities = [
-  {
-    id: "meeting-a",
-    name: "4号館 会議室A",
-    detail: "御器所 / 会議室 / 定員16",
-    badge: "モニタ・Web会議",
-  },
-  {
-    id: "seminar-b",
-    name: "2号館 セミナー室B",
-    detail: "御器所 / 演習室 / 定員40",
-    badge: "プロジェクタ・録画設備",
-  },
-  {
-    id: "hall-c",
-    name: "共用ホールC",
-    detail: "御器所 / 共用スペース / 定員80",
-    badge: "大型スクリーン・配信設備",
-  },
-  {
-    id: "studio-d",
-    name: "デザイン工房D",
-    detail: "多治見 / 実験室 / 定員24",
-    badge: "3Dプリンタ・工作台",
-  },
+  { id: "room-51", group: "御器所キャンパス 講義室", floor: "51号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-52-53", group: "御器所キャンパス 講義室", floor: "52・53号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-23", group: "御器所キャンパス 講義室", floor: "23号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-1", group: "御器所キャンパス 講義室", floor: "1号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-2", group: "御器所キャンパス 講義室", floor: "2号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-3", group: "御器所キャンパス 講義室", floor: "3号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-12", group: "御器所キャンパス 講義室", floor: "12号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "room-24", group: "御器所キャンパス 講義室", floor: "24号館", name: "講義室", useTime: "土日祝 7:00-21:00" },
+  { id: "hall-1f", group: "御器所キャンパス NITech Hall", floor: "1階", name: "ホール・ホワイエ", useTime: "毎日 8:00-21:00" },
+  { id: "hall-2f", group: "御器所キャンパス NITech Hall", floor: "2階", name: "EPSON STUDIO", useTime: "休業期の土日祝 8:00-21:00" },
+  { id: "chikusa-ground", group: "千種キャンパス", floor: "グラウンド", name: "サッカーフィールド", useTime: "毎日 8:00-18:00" },
 ];
 
 const state = {
-  selectedFacilityIds: ["meeting-a"],
-  selectedDates: ["2026-04-20"],
-  selectedSlots: [{ id: 1, date: "2026-04-20", start: "13:00", end: "15:00" }],
+  viewedDate: new Date(2026, 5, 1),
+  selectedSlots: [],
 };
 
-const facilityOptions = document.querySelector("#facilityOptions");
-const selectedSlots = document.querySelector("#selectedSlots");
-const previewPanel = document.querySelector("#previewPanel");
-const reservationForm = document.querySelector("#reservationForm");
-const dateInput = document.querySelector("#dateInput");
-const startTimeInput = document.querySelector("#startTimeInput");
-const endTimeInput = document.querySelector("#endTimeInput");
-const addSlotButton = document.querySelector("#addSlotButton");
-const addDateButton = document.querySelector("#addDateButton");
-const selectedDates = document.querySelector("#selectedDates");
-
-function renderFacilities() {
-  facilityOptions.innerHTML = facilities
-    .map((facility) => {
-      const checked = state.selectedFacilityIds.includes(facility.id) ? "checked" : "";
-      return `
-        <label class="facility-option">
-          <input type="checkbox" value="${facility.id}" ${checked} />
-          <div>
-            <strong>${facility.name}</strong>
-            <div class="option-meta">${facility.detail}</div>
-          </div>
-          <span class="option-badge">${facility.badge}</span>
-        </label>
-      `;
-    })
-    .join("");
+function pad(value) {
+  return String(value).padStart(2, "0");
 }
 
-function renderSlots() {
-  if (state.selectedSlots.length === 0) {
-    selectedSlots.innerHTML = `<div class="empty-note">利用日時を追加してください。</div>`;
+function formatDate(date) {
+  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+}
+
+function getDayLabel(date) {
+  return ["日", "月", "火", "水", "木", "金", "土"][date.getDay()];
+}
+
+function getDaysInMonth(date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+}
+
+function getAvailability(facility, day, slotId) {
+  const slotIndex = timeSlots.findIndex((slot) => slot.id === slotId);
+  const date = new Date(state.viewedDate.getFullYear(), state.viewedDate.getMonth(), day);
+  const isWeekend = date.getDay() === 0 || date.getDay() === 6;
+  const seed = day * 9 + facility.id.length * 4 + slotIndex * 13 + state.viewedDate.getMonth();
+
+  if (facility.group.includes("講義室") && !isWeekend) {
+    return "closed";
+  }
+  if (facility.id === "hall-2f" && !isWeekend) {
+    return "closed";
+  }
+  if (facility.id === "chikusa-ground" && slotId === "night") {
+    return "closed";
+  }
+  if (seed % 13 === 0) {
+    return "closed";
+  }
+  if (seed % 6 === 0 || seed % 8 === 0) {
+    return "booked";
+  }
+  if (seed % 5 === 0) {
+    return "limited";
+  }
+  return "open";
+}
+
+function getStatusMark(status) {
+  return { open: "○", limited: "△", booked: "×", closed: "-" }[status];
+}
+
+function getStatusLabel(status) {
+  return {
+    open: "空きあり",
+    limited: "残りわずか",
+    booked: "予約不可",
+    closed: "休館・受付外",
+  }[status];
+}
+
+function isSelectable(status) {
+  return status === "open" || status === "limited";
+}
+
+function setupGlobalMenu() {
+  const header = document.querySelector(".site-header");
+  const button = document.querySelector(".menu-button");
+  if (!header || !button) {
     return;
   }
 
-  selectedSlots.innerHTML = state.selectedSlots
-    .map(
-      (slot) => `
-        <article class="slot-item">
-          <div>
-            <strong>${slot.date}</strong>
-            <div class="slot-meta">${slot.start} - ${slot.end}</div>
-          </div>
-          <button type="button" class="ghost-remove" data-slot-id="${slot.id}">削除</button>
-        </article>
-      `
-    )
-    .join("");
+  button.addEventListener("click", () => {
+    const open = header.classList.toggle("is-open");
+    button.setAttribute("aria-expanded", String(open));
+  });
 }
 
-function renderDates() {
-  if (state.selectedDates.length === 0) {
-    selectedDates.innerHTML = `<div class="empty-note">先に利用日を追加してください。</div>`;
+function setupCalendar() {
+  const calendarHead = document.querySelector("#calendarHead");
+  const calendarBody = document.querySelector("#calendarBody");
+  const currentMonth = document.querySelector("#currentMonth");
+  const prevMonth = document.querySelector("#prevMonth");
+  const nextMonth = document.querySelector("#nextMonth");
+  const buildingFilter = document.querySelector("#buildingFilter");
+  const timeFilter = document.querySelector("#timeFilter");
+  const availableOnly = document.querySelector("#availableOnly");
+  const selectedSlots = document.querySelector("#selectedSlots");
+
+  if (!calendarHead || !calendarBody || !currentMonth) {
     return;
   }
 
-  selectedDates.innerHTML = state.selectedDates
-    .map(
-      (date) => `
-        <span class="date-tag">
-          ${date}
-          <button type="button" data-date="${date}">×</button>
-        </span>
-      `
-    )
-    .join("");
-}
+  const getFilteredFacilities = () => {
+    const group = buildingFilter.value;
+    return facilities.filter((facility) => group === "all" || facility.group === group);
+  };
 
-function renderPreview() {
-  const selectedFacilityNames = facilities
-    .filter((facility) => state.selectedFacilityIds.includes(facility.id))
-    .map((facility) => facility.name);
+  const getVisibleSlots = () => {
+    const selected = timeFilter.value;
+    return timeSlots.filter((slot) => selected === "all" || slot.id === selected);
+  };
 
-  const applicantName = document.querySelector("#applicantName").value || "未入力";
-  const department = document.querySelector("#department").value || "未入力";
-  const email = document.querySelector("#email").value || "未入力";
-  const phone = document.querySelector("#phone").value || "未入力";
-  const purpose = document.querySelector("#purpose").value || "未入力";
-  const notes = document.querySelector("#notes").value || "特記事項なし";
+  const renderBuildingFilter = () => {
+    const groups = [...new Set(facilities.map((facility) => facility.group))];
+    buildingFilter.innerHTML = [
+      `<option value="all">すべて</option>`,
+      ...groups.map((group) => `<option value="${group}">${group}</option>`),
+    ].join("");
+  };
 
-  previewPanel.innerHTML = `
-    <div class="preview-block">
-      <strong>利用施設</strong>
-      <p>${selectedFacilityNames.length > 0 ? selectedFacilityNames.join(" / ") : "未選択"}</p>
-    </div>
-    <div class="preview-block">
-      <strong>利用日時</strong>
-      <p>${state.selectedSlots.map((slot) => `${slot.date} ${slot.start}-${slot.end}`).join("<br />")}</p>
-    </div>
-    <div class="preview-block">
-      <strong>申請者情報</strong>
-      <p>${applicantName} / ${department}</p>
-      <p class="preview-muted">${email} / ${phone}</p>
-    </div>
-    <div class="preview-block">
-      <strong>利用目的・備考</strong>
-      <p>${purpose}</p>
-      <p class="preview-muted">${notes}</p>
-    </div>
-  `;
-}
+  const renderHead = () => {
+    const days = getDaysInMonth(state.viewedDate);
+    const slots = getVisibleSlots();
+    const year = state.viewedDate.getFullYear();
+    const month = state.viewedDate.getMonth();
+    const dateHeads = Array.from({ length: days }, (_, index) => {
+      const day = index + 1;
+      const date = new Date(year, month, day);
+      const weekend = date.getDay() === 0 ? " sunday" : date.getDay() === 6 ? " saturday" : "";
+      return `<th class="date-head${weekend}" colspan="${slots.length}">${pad(day)}(${getDayLabel(date)})</th>`;
+    }).join("");
+    const slotHeads = Array.from({ length: days }, () =>
+      slots.map((slot) => `<th class="slot-head">${slot.label}</th>`).join("")
+    ).join("");
 
-function render() {
-  renderFacilities();
-  renderDates();
-  renderSlots();
-  renderPreview();
-}
+    calendarHead.innerHTML = `
+      <tr>
+        <th class="sticky room-spacer" colspan="2"></th>
+        ${dateHeads}
+      </tr>
+      <tr>
+        <th class="sticky room-head">部屋名</th>
+        <th class="sticky capacity-head">使用可能日時</th>
+        ${slotHeads}
+      </tr>
+    `;
+  };
 
-function addDate() {
-  const date = dateInput.value;
+  const renderBody = () => {
+    const days = getDaysInMonth(state.viewedDate);
+    const slots = getVisibleSlots();
+    const rows = [];
+    let groupName = "";
 
-  if (!date || state.selectedDates.includes(date)) {
-    return;
-  }
+    getFilteredFacilities().forEach((facility) => {
+      if (facility.group !== groupName) {
+        groupName = facility.group;
+        rows.push(`<tr class="group-row"><th colspan="${days * slots.length + 2}">${facility.group}</th></tr>`);
+      }
 
-  state.selectedDates = [...state.selectedDates, date].sort();
-  renderDates();
-  renderPreview();
-}
+      const cells = Array.from({ length: days }, (_, index) => {
+        const day = index + 1;
+        const date = new Date(state.viewedDate.getFullYear(), state.viewedDate.getMonth(), day);
+        const dateValue = formatDate(date);
 
-function addSlot() {
-  const start = startTimeInput.value;
-  const end = endTimeInput.value;
+        return slots
+          .map((slot) => {
+            const status = getAvailability(facility, day, slot.id);
+            const key = `${facility.id}-${dateValue}-${slot.id}`;
+            const selected = state.selectedSlots.some((item) => item.key === key);
+            const dim = availableOnly.checked && !isSelectable(status) ? " dimmed" : "";
+            const selectedClass = selected ? " selected" : "";
+            const label = `${dateValue} ${facility.name} ${slot.label} ${getStatusLabel(status)}`;
 
-  if (state.selectedDates.length === 0 || !start || !end) {
-    return;
-  }
+            if (!isSelectable(status)) {
+              return `<td class="status status-${status}${dim}" aria-label="${label}"><span>${getStatusMark(status)}</span></td>`;
+            }
 
-  const nextSlots = state.selectedDates
-    .filter(
-      (date) =>
-        !state.selectedSlots.some(
-          (slot) => slot.date === date && slot.start === start && slot.end === end
-        )
-    )
-    .map((date) => ({
-      id: Date.now() + Math.floor(Math.random() * 10000),
-      date,
-      start,
-      end,
-    }));
+            return `
+              <td class="status status-${status}${selectedClass}" aria-label="${label}">
+                <button type="button" data-key="${key}" data-facility="${facility.id}" data-date="${dateValue}" data-slot="${slot.id}" aria-pressed="${selected}">
+                  ${getStatusMark(status)}
+                </button>
+              </td>
+            `;
+          })
+          .join("");
+      }).join("");
 
-  if (nextSlots.length === 0) {
-    return;
-  }
+      rows.push(`
+        <tr>
+          <th class="sticky room-name"><span>${facility.floor}</span>${facility.name}</th>
+          <td class="sticky capacity">${facility.useTime}</td>
+          ${cells}
+        </tr>
+      `);
+    });
 
-  state.selectedSlots = [...state.selectedSlots, ...nextSlots].sort((a, b) =>
-    `${a.date}${a.start}`.localeCompare(`${b.date}${b.start}`)
-  );
+    calendarBody.innerHTML = rows.join("");
+  };
 
+  const renderSelected = () => {
+    if (!selectedSlots) {
+      return;
+    }
+    if (state.selectedSlots.length === 0) {
+      selectedSlots.innerHTML = `<div class="empty-note">まだ候補が選択されていません。</div>`;
+      return;
+    }
+
+    selectedSlots.innerHTML = state.selectedSlots
+      .map((item) => {
+        const facility = facilities.find((entry) => entry.id === item.facilityId);
+        const slot = timeSlots.find((entry) => entry.id === item.slotId);
+        return `
+          <article class="selected-slot">
+            <div>
+              <strong>${facility.name}</strong>
+              <p>${item.date} ${slot.label} ${slot.time}</p>
+            </div>
+            <button type="button" data-remove="${item.key}" aria-label="${facility.name}を削除">×</button>
+          </article>
+        `;
+      })
+      .join("");
+  };
+
+  const render = () => {
+    currentMonth.textContent = `${state.viewedDate.getFullYear()}年 ${pad(state.viewedDate.getMonth() + 1)}月`;
+    renderHead();
+    renderBody();
+    renderSelected();
+  };
+
+  const changeMonth = (amount) => {
+    state.viewedDate = new Date(state.viewedDate.getFullYear(), state.viewedDate.getMonth() + amount, 1);
+    render();
+  };
+
+  renderBuildingFilter();
   render();
+
+  prevMonth.addEventListener("click", () => changeMonth(-1));
+  nextMonth.addEventListener("click", () => changeMonth(1));
+  buildingFilter.addEventListener("change", render);
+  timeFilter.addEventListener("change", render);
+  availableOnly.addEventListener("change", render);
+
+  calendarBody.addEventListener("click", (event) => {
+    const button = event.target.closest("button[data-key]");
+    if (!button) {
+      return;
+    }
+
+    const key = button.dataset.key;
+    const exists = state.selectedSlots.some((item) => item.key === key);
+    if (exists) {
+      state.selectedSlots = state.selectedSlots.filter((item) => item.key !== key);
+    } else {
+      state.selectedSlots = [
+        ...state.selectedSlots,
+        {
+          key,
+          facilityId: button.dataset.facility,
+          date: button.dataset.date,
+          slotId: button.dataset.slot,
+        },
+      ];
+    }
+    render();
+  });
+
+  selectedSlots?.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-remove]");
+    if (!button) {
+      return;
+    }
+    state.selectedSlots = state.selectedSlots.filter((item) => item.key !== button.dataset.remove);
+    render();
+  });
 }
 
-function handleSubmit(event) {
-  event.preventDefault();
-  renderPreview();
-  window.alert("確認画面へ進む想定のモックです。");
+function setupMockForms() {
+  document.querySelectorAll("form[data-mock-form]").forEach((form) => {
+    form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      window.alert(form.dataset.message || "入力内容を受け付けました。");
+    });
+  });
 }
 
-facilityOptions.addEventListener("change", () => {
-  state.selectedFacilityIds = [...facilityOptions.querySelectorAll('input[type="checkbox"]:checked')].map(
-    (input) => input.value
-  );
-  renderPreview();
-});
-
-selectedSlots.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-slot-id]");
-  if (!button) {
-    return;
-  }
-
-  state.selectedSlots = state.selectedSlots.filter(
-    (slot) => String(slot.id) !== button.dataset.slotId
-  );
-  render();
-});
-
-selectedDates.addEventListener("click", (event) => {
-  const button = event.target.closest("[data-date]");
-  if (!button) {
-    return;
-  }
-
-  state.selectedDates = state.selectedDates.filter((date) => date !== button.dataset.date);
-  renderDates();
-  renderPreview();
-});
-
-addDateButton.addEventListener("click", addDate);
-addSlotButton.addEventListener("click", addSlot);
-
-reservationForm.addEventListener("input", renderPreview);
-reservationForm.addEventListener("submit", handleSubmit);
-
-render();
+setupGlobalMenu();
+setupCalendar();
+setupMockForms();
