@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ja">
   <head>
     <meta charset="UTF-8" />
@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="styles.css?v=20260610-3" />
+    <link rel="stylesheet" href="styles.css?v=20260610-4" />
   </head>
   <body>
     <header class="site-header"><a class="brand" href="index.html"><span class="brand-mark">N</span><span><strong>名古屋工業大学 施設予約</strong><small>NAGOYA INSTITUTE OF TECHNOLOGY</small></span></a><button class="menu-button" type="button" aria-label="メニュー" aria-expanded="false"><span></span><span></span><span></span></button><nav class="global-nav"><a href="news.html">お知らせ</a><a href="schedule.html">スケジュール</a><a href="information.html">センターご案内</a><a href="floor.html">施設貸出</a><a href="access.html">アクセス</a><a href="contact.html">お問い合わせ</a><a class="login-link" href="login.html">LOG IN</a></nav></header>
@@ -38,9 +38,38 @@
             </tbody>
           </table>
         </div>
+        <h3>公式資料ダウンロード</h3>
+        <div class="doc-list">
+          <a href="assets/docs/2024sisan.xlsx" download><strong>講義室 料金表</strong><span>Excel</span></a>
+          <a href="assets/docs/2024sisan.pdf" target="_blank"><strong>講義室 料金表</strong><span>PDF</span></a>
+          <a href="assets/docs/2024nitechhall_240328.pdf" target="_blank"><strong>NITech Hall 料金表</strong><span>PDF</span></a>
+          <a href="assets/docs/2024ground.xlsx" download><strong>グラウンド料金表</strong><span>Excel</span></a>
+          <a href="assets/docs/2024ground.pdf" target="_blank"><strong>グラウンド料金表</strong><span>PDF</span></a>
+        </div>
+        <h3>簡易料金試算</h3>
+        <p>公式料金表から抽出した1時間あたり使用料を使って、概算額を試算できます。実際の請求額は大学から発行される請求書を確認してください。</p>
+        <form id="feeCalculator" class="form-grid two">
+          <label>
+            <span>施設</span>
+            <select id="feeFacility"></select>
+          </label>
+          <label>
+            <span>使用時間</span>
+            <input id="feeHours" type="number" min="1" step="1" value="1" />
+          </label>
+          <label>
+            <span>ワイヤレスマイク（本）</span>
+            <input id="feeMicCount" type="number" min="0" step="1" value="0" />
+          </label>
+          <label>
+            <span>プロジェクター（台）</span>
+            <input id="feeProjectorCount" type="number" min="0" step="1" value="0" />
+          </label>
+        </form>
+        <div id="feeResult" class="calculator-result"></div>
       </section>
     </main>
     <footer class="site-footer"><div><strong>名古屋工業大学 施設予約</strong><p>講義室・グラウンド: 財務課管財係 / NITech Hall: 学術情報課</p></div><nav><a href="index.html">施設予約</a><a href="floor.html">施設貸出</a><a href="access.html">アクセス</a><a href="contact.html">お問い合わせ</a></nav></footer>
-    <script src="app.js?v=20260610-3"></script>
+    <script src="app.js?v=20260610-4"></script>
   </body>
 </html>

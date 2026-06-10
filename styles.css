@@ -754,6 +754,69 @@ textarea {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.doc-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 16px 0 22px;
+}
+
+.doc-list.compact {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.doc-list a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.74);
+  text-decoration: none;
+}
+
+.doc-list span {
+  flex: 0 0 auto;
+  min-width: 58px;
+  padding: 5px 9px;
+  color: #fff;
+  background: var(--black);
+  text-align: center;
+  font: 800 0.72rem "Space Grotesk", sans-serif;
+  letter-spacing: 0.06em;
+}
+
+.calculator-result {
+  margin-top: 16px;
+  padding: 18px;
+  border: 1px solid var(--line-dark);
+  background: #fffdf8;
+}
+
+.calculator-result strong {
+  display: block;
+  font-size: 1.35rem;
+}
+
+.calculator-result dl {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px 16px;
+  margin: 12px 0 0;
+}
+
+.calculator-result dt,
+.calculator-result dd {
+  margin: 0;
+}
+
+.calculator-result dt {
+  color: var(--muted);
+}
+
 .login-panel {
   max-width: 520px;
   margin: 0 auto;
@@ -849,6 +912,8 @@ textarea {
   .calendar-controls,
   .table-tools,
   .form-grid.two,
+  .doc-list,
+  .doc-list.compact,
   .site-footer {
     grid-template-columns: 1fr;
     flex-direction: column;

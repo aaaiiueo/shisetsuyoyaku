@@ -1,0 +1,537 @@
+{
+  "updatedFrom": "https://www.nitech.ac.jp/intro/facilities.html",
+  "currency": "JPY",
+  "taxRate": 0.1,
+  "items": [
+    {
+      "category": "lecture_room",
+      "label": "51号館 5111",
+      "building": "51号館",
+      "room": "5111",
+      "areaSqm": 396,
+      "capacity": 400,
+      "hourlyRate": 8700,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "51号館 5112",
+      "building": "51号館",
+      "room": "5112",
+      "areaSqm": 79,
+      "capacity": 42,
+      "hourlyRate": 1600,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5211",
+      "building": "52・53号館",
+      "room": "5211",
+      "areaSqm": 228,
+      "capacity": 220,
+      "hourlyRate": 5600,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5212",
+      "building": "52・53号館",
+      "room": "5212",
+      "areaSqm": 228,
+      "capacity": 220,
+      "hourlyRate": 5600,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5214",
+      "building": "52・53号館",
+      "room": "5214",
+      "areaSqm": 144,
+      "capacity": 125,
+      "hourlyRate": 3000,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5215",
+      "building": "52・53号館",
+      "room": "5215",
+      "areaSqm": 69,
+      "capacity": 61,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5216",
+      "building": "52・53号館",
+      "room": "5216",
+      "areaSqm": 69,
+      "capacity": 61,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5217",
+      "building": "52・53号館",
+      "room": "5217",
+      "areaSqm": 69,
+      "capacity": 61,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5218",
+      "building": "52・53号館",
+      "room": "5218",
+      "areaSqm": 69,
+      "capacity": 61,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5221",
+      "building": "52・53号館",
+      "room": "5221",
+      "areaSqm": 144,
+      "capacity": 130,
+      "hourlyRate": 3200,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5222",
+      "building": "52・53号館",
+      "room": "5222",
+      "areaSqm": 138,
+      "capacity": 129,
+      "hourlyRate": 3100,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5223",
+      "building": "52・53号館",
+      "room": "5223",
+      "areaSqm": 138,
+      "capacity": 130,
+      "hourlyRate": 3100,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5224",
+      "building": "52・53号館",
+      "room": "5224",
+      "areaSqm": 144,
+      "capacity": 128,
+      "hourlyRate": 3000,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5225",
+      "building": "52・53号館",
+      "room": "5225",
+      "areaSqm": 69,
+      "capacity": 61,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5226",
+      "building": "52・53号館",
+      "room": "5226",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5227",
+      "building": "52・53号館",
+      "room": "5227",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5228",
+      "building": "52・53号館",
+      "room": "5228",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5231",
+      "building": "52・53号館",
+      "room": "5231",
+      "areaSqm": 92,
+      "capacity": 78,
+      "hourlyRate": 2100,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5232",
+      "building": "52・53号館",
+      "room": "5232",
+      "areaSqm": 92,
+      "capacity": 78,
+      "hourlyRate": 2000,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5233",
+      "building": "52・53号館",
+      "room": "5233",
+      "areaSqm": 92,
+      "capacity": 78,
+      "hourlyRate": 2100,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5234",
+      "building": "52・53号館",
+      "room": "5234",
+      "areaSqm": 144,
+      "capacity": 130,
+      "hourlyRate": 3000,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5235",
+      "building": "52・53号館",
+      "room": "5235",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5236",
+      "building": "52・53号館",
+      "room": "5236",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5237",
+      "building": "52・53号館",
+      "room": "5237",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "52・53号館 5238",
+      "building": "52・53号館",
+      "room": "5238",
+      "areaSqm": 69,
+      "capacity": 62,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "23号館 2311（共1）",
+      "building": "23号館",
+      "room": "2311（共1）",
+      "areaSqm": 214,
+      "capacity": 224,
+      "hourlyRate": 4600,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "23号館 2312（共2）",
+      "building": "23号館",
+      "room": "2312（共2）",
+      "areaSqm": 132,
+      "capacity": 120,
+      "hourlyRate": 2800,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "23号館 2321（共3）",
+      "building": "23号館",
+      "room": "2321（共3）",
+      "areaSqm": 132,
+      "capacity": 123,
+      "hourlyRate": 2700,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "23号館 2323（共5）",
+      "building": "23号館",
+      "room": "2323（共5）",
+      "areaSqm": 166,
+      "capacity": 157,
+      "hourlyRate": 3400,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "23号館 2331（共7）",
+      "building": "23号館",
+      "room": "2331（共7）",
+      "areaSqm": 132,
+      "capacity": 126,
+      "hourlyRate": 2700,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "23号館 2341（共9）",
+      "building": "23号館",
+      "room": "2341（共9）",
+      "areaSqm": 132,
+      "capacity": 123,
+      "hourlyRate": 2700,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "1号館 0111(C3)",
+      "building": "1号館",
+      "room": "0111(C3)",
+      "areaSqm": 117,
+      "capacity": 112,
+      "hourlyRate": 2300,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "1号館 0112(K1)",
+      "building": "1号館",
+      "room": "0112(K1)",
+      "areaSqm": 117,
+      "capacity": 96,
+      "hourlyRate": 2300,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "1号館 0113(K2)",
+      "building": "1号館",
+      "room": "0113(K2)",
+      "areaSqm": 72,
+      "capacity": 63,
+      "hourlyRate": 1500,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館C棟 0211(F1)",
+      "building": "2号館C棟",
+      "room": "0211(F1)",
+      "areaSqm": 181,
+      "capacity": 140,
+      "hourlyRate": 3100,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館B棟 0212(F2)",
+      "building": "2号館B棟",
+      "room": "0212(F2)",
+      "areaSqm": 98,
+      "capacity": 80,
+      "hourlyRate": 1800,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館C棟 0221(I1)",
+      "building": "2号館C棟",
+      "room": "0221(I1)",
+      "areaSqm": 104,
+      "capacity": 77,
+      "hourlyRate": 2000,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館C棟 0222(W)",
+      "building": "2号館C棟",
+      "room": "0222(W)",
+      "areaSqm": 93,
+      "capacity": 72,
+      "hourlyRate": 1700,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館C棟 0223(Y)",
+      "building": "2号館C棟",
+      "room": "0223(Y)",
+      "areaSqm": 91,
+      "capacity": 70,
+      "hourlyRate": 1600,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館C棟 0231(I2)",
+      "building": "2号館C棟",
+      "room": "0231(I2)",
+      "areaSqm": 104,
+      "capacity": 77,
+      "hourlyRate": 2000,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館C棟 0232(WY)",
+      "building": "2号館C棟",
+      "room": "0232(WY)",
+      "areaSqm": 181,
+      "capacity": 140,
+      "hourlyRate": 3200,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "2号館B棟 0233(F3)",
+      "building": "2号館B棟",
+      "room": "0233(F3)",
+      "areaSqm": 91,
+      "capacity": 72,
+      "hourlyRate": 1600,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "3号館 0321(M3)",
+      "building": "3号館",
+      "room": "0321(M3)",
+      "areaSqm": 98,
+      "capacity": 86,
+      "hourlyRate": 1800,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "3号館 0322(M4)",
+      "building": "3号館",
+      "room": "0322(M4)",
+      "areaSqm": 74,
+      "capacity": 59,
+      "hourlyRate": 1300,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "3号館 0323(M5)",
+      "building": "3号館",
+      "room": "0323(M5)",
+      "areaSqm": 74,
+      "capacity": 60,
+      "hourlyRate": 1300,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "12号館 1221(M1)",
+      "building": "12号館",
+      "room": "1221(M1)",
+      "areaSqm": 161,
+      "capacity": 150,
+      "hourlyRate": 2900,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "12号館 1222(M2)",
+      "building": "12号館",
+      "room": "1222(M2)",
+      "areaSqm": 161,
+      "capacity": 150,
+      "hourlyRate": 2900,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "lecture_room",
+      "label": "24号館 2421(A1)",
+      "building": "24号館",
+      "room": "2421(A1)",
+      "areaSqm": 103,
+      "capacity": 92,
+      "hourlyRate": 1900,
+      "source": "2024sisan.xlsx"
+    },
+    {
+      "category": "nitech_hall",
+      "label": "NITech Hall 1階 ホール・ホワイエ",
+      "building": "NITech Hall",
+      "room": "1階",
+      "areaSqm": null,
+      "capacity": null,
+      "hourlyRate": 15300,
+      "source": "2024nitechhall_240328.pdf"
+    },
+    {
+      "category": "nitech_hall",
+      "label": "NITech Hall 2階 EPSON STUDIO",
+      "building": "NITech Hall",
+      "room": "2階 EPSON STUDIO",
+      "areaSqm": null,
+      "capacity": null,
+      "hourlyRate": 10800,
+      "source": "2024nitechhall_240328.pdf"
+    },
+    {
+      "category": "ground",
+      "label": "千種キャンパス 野球場",
+      "building": "千種キャンパス",
+      "room": "野球場",
+      "areaSqm": null,
+      "capacity": null,
+      "hourlyRate": 2200,
+      "source": "2024ground.xlsx"
+    },
+    {
+      "category": "ground",
+      "label": "千種キャンパス サッカーフィールド",
+      "building": "千種キャンパス",
+      "room": "サッカーフィールド",
+      "areaSqm": null,
+      "capacity": null,
+      "hourlyRate": 1500,
+      "source": "2024ground.xlsx"
+    },
+    {
+      "category": "ground",
+      "label": "千種キャンパス トラック",
+      "building": "千種キャンパス",
+      "room": "トラック",
+      "areaSqm": null,
+      "capacity": null,
+      "hourlyRate": 1500,
+      "source": "2024ground.xlsx"
+    }
+  ]
+}

@@ -300,6 +300,80 @@ function setupMockForms() {
   });
 }
 
+async function setupFeeCalculator() {
+  const form = document.querySelector("#feeCalculator");
+  const facilitySelect = document.querySelector("#feeFacility");
+  const hoursInput = document.querySelector("#feeHours");
+  const micInput = document.querySelector("#feeMicCount");
+  const projectorInput = document.querySelector("#feeProjectorCount");
+  const result = document.querySelector("#feeResult");
+
+  if (!form || !facilitySelect || !result) {
+    return;
+  }
+
+  let pricing;
+  try {
+    const response = await fetch("assets/docs/pricing-data.json");
+    pricing = await response.json();
+  } catch (error) {
+    result.textContent = "料金データを読み込めませんでした。公式PDFまたはExcelを確認してください。";
+    return;
+  }
+
+  const formatter = new Intl.NumberFormat("ja-JP", {
+    style: "currency",
+    currency: pricing.currency || "JPY",
+    maximumFractionDigits: 0,
+  });
+
+  facilitySelect.innerHTML = pricing.items
+    .map((item, index) => {
+      const capacity = item.capacity ? ` / ${item.capacity}人` : "";
+      return `<option value="${index}">${item.label}${capacity} - ${formatter.format(item.hourlyRate)}/h</option>`;
+    })
+    .join("");
+
+  const readNumber = (input) => Math.max(0, Number(input.value || 0));
+
+  const renderEstimate = () => {
+    const item = pricing.items[Number(facilitySelect.value)];
+    const hours = Math.max(1, Math.ceil(readNumber(hoursInput)));
+    const isHall = item.category === "nitech_hall";
+    const isGround = item.category === "ground";
+    const micCount = isHall || isGround ? 0 : readNumber(micInput);
+    const projectorCount = isHall || isGround ? 0 : readNumber(projectorInput);
+    const facilityFee = item.hourlyRate * hours;
+    const equipmentFee = (micCount * 500 + projectorCount * 450) * hours;
+    const taxable = facilityFee + equipmentFee;
+    const tax = Math.floor(taxable * (pricing.taxRate || 0.1));
+    const total = taxable + tax;
+    const sourceNote = isHall
+      ? "NITech Hall はマイク・プロジェクター等の機材使用料込みです。"
+      : isGround
+        ? "グラウンド料金は施設使用料のみの試算です。"
+        : "備品はワイヤレスマイク 500円/h、プロジェクター 450円/hで試算しています。";
+
+    result.innerHTML = `
+      <strong>${formatter.format(total)}</strong>
+      <dl>
+        <dt>施設</dt><dd>${item.label}</dd>
+        <dt>使用時間</dt><dd>${hours}時間</dd>
+        <dt>施設使用料</dt><dd>${formatter.format(facilityFee)}</dd>
+        <dt>備品使用料</dt><dd>${formatter.format(equipmentFee)}</dd>
+        <dt>消費税</dt><dd>${formatter.format(tax)}</dd>
+        <dt>参照元</dt><dd>${item.source}</dd>
+      </dl>
+      <p>${sourceNote}</p>
+    `;
+  };
+
+  form.addEventListener("input", renderEstimate);
+  facilitySelect.addEventListener("change", renderEstimate);
+  renderEstimate();
+}
+
 setupGlobalMenu();
 setupCalendar();
 setupMockForms();
+setupFeeCalculator();
